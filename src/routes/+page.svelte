@@ -5,42 +5,50 @@
 	var formats = data.formats;
 </script>
 
-<div class="main">
-	<h1 class="title">JackSucksAtMemes</h1>
-	<div class="formats">
-		{#each formats as format}
-			<img
-				src={`${dev ? 'http://localhost:3000' : 'https://jsal-api.daanschenkel.nl'}/img/${
-					format.id
-				}`}
-				alt={format.friendlyName}
-				width="200"
-				height="200"
-				on:click={() => {
-					goto(`/format/${format.id}`);
-				}}
-			/>
-		{/each}
+<div class="container">
+	<div class="main">
+		<h1 class="title">JackSucksAtMemes</h1>
+
+		<div class="formats">
+			{#each formats as format}
+				<img
+					src={`${dev ? 'http://localhost:3000' : 'https://jsal-api.daanschenkel.nl'}/img/${
+						format.id
+					}`}
+					alt={format.friendlyName}
+					width="200"
+					height="200"
+					on:click={() => {
+						goto(`/format/${format.id}`);
+					}}
+				/>
+			{/each}
+		</div>
 	</div>
 </div>
 
 <style>
-	.main {
-		background-color: #fff;
-		width: 90%;
-		height: 90%;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		/*align items to center*/
+	.container {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
 		align-items: center;
+		justify-content: center;
+	}
+	.main {
+		background-color: #fff;
+
+		margin: auto;
 
 		/*border*/
 		border-radius: 10px;
+
+		margin-top: 20px;
+
+		/*center*/
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
 	}
 	.title {
 		font-size: 30px;
