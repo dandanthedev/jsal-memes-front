@@ -8,13 +8,17 @@
 			return text.default || '';
 		})
 		.join('|')}`;
-	async function generate() {
-		var url = `https://jsal-api.daanschenkel.nl/gen/${format.id}?input=`;
+	async function dataString() {
+		var data = '';
 		for (var i = 0; i < format.text.length; i++) {
 			console.log(i, format.text.length);
-			url += inputs[i] || '';
-			if (i !== format.text.length - 1) url += '|';
+			data += inputs[i] || '';
+			if (i !== format.text.length - 1) data += '|';
 		}
+		return data;
+	}
+	async function generate() {
+		var url = `https://jsal-api.daanschenkel.nl/gen/${format.id}?input=${await dataString()}`;
 		input = url;
 	}
 </script>
@@ -37,12 +41,9 @@
 		/>
 	{/each}
 	<button
-		on:click={() => {
-			var img = document.getElementById('result');
-			var link = document.createElement('a');
-			link.href = img.src;
-			link.download = `${format.friendlyName}.png`;
-			link.click();
+		on:click={async () => {
+			var data = await dataString();
+			goto(`/download/${format.id}?input=${data}`);
 		}}
 		class="generateButton">Download</button
 	>
