@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+		<meta name="viewport" content="width=device-width" />
+		%sveltekit.head%
+	</head>
+	<body data-sveltekit-preload-data="hover" class="bg">
+		<div style="display: contents">%sveltekit.body%</div>
+		<p class="credits">
+			Made by <a target="_blank" href="https://daanschenkel.nl">Daan Schenkel</a>
+		</p>
+	</body>
+</html>
+<style>
+	.bg {
+		background-color: #000000;
+	}
+	.credits {
+		color: #ffffff;
+		position: absolute;
+		right: 10px;
+		bottom: 10px;
+		font-family: 'Roboto', sans-serif;
+		font-size: 12px;
+	}
+	.credits a {
+		color: #ffffff;
+	}
+</style>
