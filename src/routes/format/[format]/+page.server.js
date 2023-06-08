@@ -1,7 +1,8 @@
+import { dev } from '$app/environment';
 export async function load({ params }) {
-	var format = await fetch(`https://jsal-api.daanschenkel.nl/format/${params.format}`).then((res) =>
-		res.json()
-	);
+	if (dev) var url = `http://localhost:3000`;
+	else var url = `https://jsal-api.daanschenkel.nl`;
+	var format = await fetch(`${url}/format/${params.format}`).then((res) => res.json());
 	return {
 		format
 	};

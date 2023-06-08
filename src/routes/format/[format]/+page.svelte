@@ -1,9 +1,12 @@
 <script>
 	import { goto } from '$app/navigation';
+	import { dev } from '$app/environment';
 	export let data;
 	var format = data.format;
 	var inputs = {};
-	var input = `https://jsal-api.daanschenkel.nl/gen/${format.id}?input=${format.text
+	var input = `${dev ? 'http://localhost:3000' : 'https://jsal-api.daanschenkel.nl'}/gen/${
+		format.id
+	}?input=${format.text
 		.map((text) => {
 			return text.default || '';
 		})
@@ -18,7 +21,9 @@
 		return data;
 	}
 	async function generate() {
-		var url = `https://jsal-api.daanschenkel.nl/gen/${format.id}?input=${await dataString()}`;
+		var url = `${dev ? 'http://localhost:3000' : 'https://jsal-api.daanschenkel.nl'}/gen/${
+			format.id
+		}?input=${await dataString()}`;
 		input = url;
 	}
 </script>

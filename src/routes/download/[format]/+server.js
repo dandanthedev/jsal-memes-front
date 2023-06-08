@@ -1,7 +1,9 @@
+import { dev } from '$app/environment';
+
 export async function GET({ params, url }) {
-	var img = await fetch(
-		`https://jsal-api.daanschenkel.nl/gen/${params.format}?input=${url.searchParams.get('input')}`
-	);
+	if (dev) var url = `http://localhost:3000/formats`;
+	else var url = `https://jsal-api.daanschenkel.nl/formats`;
+	var img = await fetch(`${url}/gen/${params.format}?input=${url.searchParams.get('input')}`);
 	//download immediately
 	return new Response(img.body, {
 		headers: {

@@ -1,5 +1,6 @@
 <script>
 	import { goto } from '$app/navigation';
+	import { dev } from '$app/environment';
 	export let data;
 	var formats = data.formats;
 </script>
@@ -9,7 +10,9 @@
 	<div class="formats">
 		{#each formats as format}
 			<img
-				src={`https://jsal-api.daanschenkel.nl/img/${format.id}`}
+				src={`${dev ? 'http://localhost:3000' : 'https://jsal-api.daanschenkel.nl'}/img/${
+					format.id
+				}`}
 				alt={format.friendlyName}
 				width="200"
 				height="200"
