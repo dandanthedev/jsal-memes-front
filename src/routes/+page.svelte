@@ -12,6 +12,7 @@
 		<div class="formats">
 			{#each formats as format}
 				<img
+					class="format"
 					src={`${dev ? 'http://localhost:3000' : 'https://jsal-api.daanschenkel.nl'}/img/${
 						format.id
 					}`}
@@ -135,5 +136,9 @@
 	}
 	.formats img:hover {
 		transform: scale(1.1);
+	}
+	.format {
+		/*dont stretch*/
+		object-fit: cover;
 	}
 </style>
