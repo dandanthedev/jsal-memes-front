@@ -41,7 +41,11 @@
 				e.target.disabled = true;
 				var page = formats.length / 10;
 				page = Math.floor(page) + 1;
-				await fetch(`/formats?page=${page}`)
+				await fetch(
+					`${
+						dev ? 'http://localhost:3000' : 'https://jsal-api.daanschenkel.nl'
+					}/formats?page=${page}`
+				)
 					.then((res) => res.json())
 					.then((data) => {
 						formats = formats.concat(data.formats);
