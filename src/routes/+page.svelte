@@ -34,6 +34,25 @@
 				/>
 			{/each}
 		</div>
+
+		<button
+			class="more"
+			on:click={async (e) => {
+				e.target.disabled = true;
+				var page = formats.length / 10;
+				page = Math.floor(page) + 1;
+				await fetch(`/formats?page=${page}`)
+					.then((res) => res.json())
+					.then((data) => {
+						formats = formats.concat(data.formats);
+						if (data.formats.length === 10) {
+							e.target.disabled = false;
+						}
+					});
+			}}
+		>
+			More
+		</button>
 	</div>
 </div>
 
@@ -149,5 +168,22 @@
 	.format {
 		/*dont stretch*/
 		object-fit: cover;
+	}
+	.more {
+		margin-top: 20px;
+		border-radius: 10px;
+		border: none;
+		background-color: #fe5292;
+		color: #fff;
+		padding: 10px;
+		font-size: 20px;
+		cursor: pointer;
+		transition: 0.5s;
+	}
+	.more:hover {
+		background-color: #ec417b;
+	}
+	.more:disabled {
+		background-color: #ccc;
 	}
 </style>
