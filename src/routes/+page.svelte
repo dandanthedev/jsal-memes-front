@@ -7,7 +7,16 @@
 
 <div class="container">
 	<div class="main">
-		<h1 class="title">JackSucksAtMemes</h1>
+		<h1
+			class="title"
+			on:click={() => {
+				//play easteregg sound
+				var audio = new Audio('/easteregg.mp3');
+				audio.play();
+			}}
+		>
+			JackSucksAtMemes
+		</h1>
 
 		<div class="formats">
 			{#each formats as format}
