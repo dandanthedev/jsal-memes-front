@@ -21,6 +21,7 @@
 		return data;
 	}
 	async function generate() {
+		document.getElementById('result').style.filter = 'blur(5px)';
 		var url = `${dev ? 'http://localhost:3000' : 'https://jsal-api.daanschenkel.nl'}/gen/${
 			format.id
 		}?input=${await dataString()}`;
@@ -32,7 +33,15 @@
 	<button on:click={() => goto('/')} class="backButton">x</button>
 	<h1 class="title">JackSucksAtMemes</h1>
 	<h2 class="formatTitle">{format.friendlyName}</h2>
-	<img src={`${input}`} alt={format.friendlyName} class="memeImg" id="result" />
+	<img
+		src={`${input}`}
+		alt={format.friendlyName}
+		class="memeImg"
+		id="result"
+		on:load={(e) => {
+			e.target.style.filter = 'blur(0px)';
+		}}
+	/>
 	{#each format.text as text, i}
 		<input
 			type="text"
@@ -173,6 +182,8 @@
 		width: 70%;
 		height: 70%;
 		object-fit: contain;
+		/*transition when filter is applied*/
+		transition: 1s;
 	}
 	.textInput {
 		margin-top: 10px;
@@ -220,5 +231,20 @@
 	.backButton:hover {
 		color: #000;
 		transform: scale(1.1);
+	}
+	@keyframes lds-ring {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+	.imageContainer {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		align-content: center;
 	}
 </style>
