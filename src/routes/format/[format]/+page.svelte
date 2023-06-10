@@ -39,8 +39,12 @@
 			placeholder="Text"
 			on:input={(e) => {
 				console.log(e.target.value, i);
+				var temp = e.target.value;
 				inputs[i] = e.target.value || '';
-				generate();
+
+				setTimeout(() => {
+					if (temp === inputs[i]) generate();
+				}, 1000);
 			}}
 			class="textInput"
 		/>
