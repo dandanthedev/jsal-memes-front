@@ -55,7 +55,7 @@
 					});
 			}}
 		>
-			More
+			Load More
 		</button>
 	</div>
 </div>
