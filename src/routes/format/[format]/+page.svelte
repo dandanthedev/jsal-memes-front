@@ -197,23 +197,7 @@
 			color: red;
 		}
 	}
-	.formats {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		justify-content: center;
-		align-items: center;
-		align-content: center;
-	}
-	.formats img {
-		margin: 10px;
-		border-radius: 10px;
-		transition: 0.5s;
-		cursor: pointer;
-	}
-	.formats img:hover {
-		transform: scale(1.1);
-	}
+
 	.formatTitle {
 		font-size: 20px;
 		font-family: 'Roboto', sans-serif;
@@ -284,12 +268,5 @@
 		100% {
 			transform: rotate(360deg);
 		}
-	}
-	.imageContainer {
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-		align-content: center;
 	}
 </style>
