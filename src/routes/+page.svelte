@@ -27,16 +27,19 @@
 		{#if data?.formats}
 			<div class="formats">
 				{#each data.formats as format}
-					<img
+					<button
 						class="format"
-						src={`/formats/${format.id}.png`}
-						alt={format.friendlyName}
-						width="200"
-						height="200"
 						on:click={() => {
 							goto(`/format/${format.id}`);
 						}}
-					/>
+					>
+						<img
+							src={`/formats/${format.id}.png`}
+							alt={format.friendlyName}
+							width="200"
+							height="200"
+						/>
+					</button>
 				{/each}
 			</div>
 		{:else}
@@ -52,7 +55,7 @@
 				class="more"
 				on:click={async (e) => {
 					e.target.disabled = true;
-					await fetch(`/getFormats?page=${data.nextPage}`)
+					await fetch(`/json?page=${data.nextPage}`)
 						.then((res) => res.json())
 						.then((newFormats) => {
 							data.formats = data.formats.concat(newFormats.formats);
@@ -173,19 +176,29 @@
 		align-items: center;
 		align-content: center;
 	}
-	.formats img {
+
+	.format {
+		border-radius: 10px;
+		border: none;
+		background-color: #fff;
+		padding: 10px;
+		cursor: pointer;
+
+		transition: all 0.3s ease;
+	}
+	.format img {
 		margin: 10px;
 		border-radius: 10px;
-		transition: 0.5s;
-		cursor: pointer;
-	}
-	.formats img:hover {
-		transform: scale(1.1);
-	}
-	.format {
-		/*dont stretch*/
+		/*dont stretch image*/
 		object-fit: cover;
+		pointer-events: none;
 	}
+
+	.format:hover {
+		filter: brightness(0.9);
+		background-color: #eee;
+	}
+
 	.more {
 		margin-top: 20px;
 		border-radius: 10px;

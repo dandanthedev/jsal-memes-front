@@ -97,9 +97,9 @@
 				type="text"
 				placeholder="Text"
 				on:input={(e) => {
+					format.text[i].text = e.target.value;
 					generate();
 				}}
-				bind:value={text.text}
 				class="textInput"
 			/>
 		{/each}
