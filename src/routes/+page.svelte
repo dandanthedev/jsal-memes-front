@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 	let data;
 	onMount(async () => {
-		await fetch(`/getFormats`)
+		await fetch(`/json`)
 			.then((res) => res.json())
 			.then((res) => {
 				data = res;
