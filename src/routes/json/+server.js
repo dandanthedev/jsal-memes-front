@@ -1,13 +1,14 @@
 import fs from 'fs';
-import { resolve as reqlib } from 'app-root-path';
+import rootPathLib from 'app-root-path';
+const { resolve } = rootPathLib;
 import { json } from '@sveltejs/kit';
 export function GET({ url }) {
 	var formats = [];
 	const page = url.searchParams.get('page') || 1;
-	fs.readdirSync(reqlib('/static/formats')).forEach((file) => {
+	fs.readdirSync(resolve('/static/formats')).forEach((file) => {
 		if (file.split('.')[1] !== 'json') return;
 
-		const format = fs.readFileSync(reqlib(`/static/formats/${file}`), 'utf8');
+		const format = fs.readFileSync(resolve(`/static/formats/${file}`), 'utf8');
 		const formatJson = JSON.parse(format);
 		formats.push({
 			id: file.split('.')[0],
