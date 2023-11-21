@@ -1,70 +1,115 @@
 <script>
 	import { goto } from '$app/navigation';
-	import { dev } from '$app/environment';
-	export let data;
-	var format = data.format;
-	var inputs = {};
-	var input = `${dev ? 'http://localhost:3000' : 'https://jsal-api.daanschenkel.nl'}/gen/${
-		format.id
-	}?input=${format.text
-		.map((text) => {
-			return text.default || '';
-		})
-		.join('|')}`;
-	async function dataString() {
-		var data = '';
-		for (var i = 0; i < format.text.length; i++) {
-			console.log(i, format.text.length);
-			data += inputs[i] || '';
-			if (i !== format.text.length - 1) data += '|';
+	import 'jimp/browser/lib/jimp.js';
+	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
+
+	const { Jimp } = window;
+
+	let format;
+	let imgSrc;
+	let jimpCache = {};
+	onMount(async () => {
+		await fetch(`/format/${$page.params.format}/json`)
+			.then((res) => res.json())
+			.then(async (res) => {
+				format = res.format;
+
+				jimpCache.img = await Jimp.read(format.img);
+				imgSrc = await jimpCache.img.getBase64Async(Jimp.MIME_PNG);
+				if (format.font) {
+					if (Jimp[format.font])
+						jimpCache.font = await Jimp.loadFont(Jimp[format.font]).then((font) => {
+							return font;
+						});
+					else {
+						//get file buffer
+
+						jimpCache.font = await Jimp.loadFont(`/fonts/${format.font}`).then((font) => {
+							return font;
+						});
+					}
+				} else
+					jimpCache.font = await Jimp.loadFont(Jimp.FONT_SANS_32_BLACK).then((font) => {
+						return font;
+					});
+
+				jimpCache.watermarkFont = await Jimp.loadFont(Jimp.FONT_SANS_16_WHITE).then((font) => {
+					return font;
+				});
+			});
+	});
+
+	async function generate(download) {
+		let img = jimpCache.img.clone();
+		//add text
+
+		format.text.forEach((t) => {
+			//print in center
+			img.print(
+				jimpCache.font,
+				t.x,
+				t.y,
+				{
+					text: t.text || '',
+					alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+					alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE
+				},
+				t.maxWidth,
+				t.maxHeight
+			);
+		});
+
+		//print watermark on bottom right
+		img.print(jimpCache.watermarkFont, 10, 10, 'jsamemes');
+
+		//set imagesource
+		imgSrc = await img.getBase64Async(Jimp.MIME_PNG);
+
+		if (download) {
+			const a = document.createElement('a');
+			a.href = imgSrc;
+			a.download = 'meme.png';
+			a.click();
 		}
-		return data;
-	}
-	async function generate() {
-		document.getElementById('result').style.filter = 'blur(5px)';
-		var url = `${dev ? 'http://localhost:3000' : 'https://jsal-api.daanschenkel.nl'}/gen/${
-			format.id
-		}?input=${await dataString()}`;
-		input = url;
 	}
 </script>
 
 <div class="main">
 	<button on:click={() => goto('/')} class="backButton">x</button>
 	<h1 class="title">JackSucksAtMemes</h1>
-	<h2 class="formatTitle">{format.friendlyName}</h2>
-	<img
-		src={`${input}`}
-		alt={format.friendlyName}
-		class="memeImg"
-		id="result"
-		on:load={(e) => {
-			e.target.style.filter = 'blur(0px)';
-		}}
-	/>
-	{#each format.text as text, i}
-		<input
-			type="text"
-			placeholder="Text"
-			on:input={(e) => {
-				console.log(e.target.value, i);
-				var temp = e.target.value;
-				inputs[i] = e.target.value || '';
 
-				setTimeout(() => {
-					if (temp === inputs[i]) generate();
-				}, 1000);
+	{#if !format}
+		<div class="loading">Loading...</div>
+	{:else}
+		<h2 class="formatTitle">{format.friendlyName}</h2>
+		<img
+			alt={format.friendlyName}
+			src={imgSrc}
+			class="memeImg"
+			id="result"
+			on:load={(e) => {
+				e.target.style.filter = 'blur(0px)';
 			}}
-			class="textInput"
 		/>
-	{/each}
-	<button
-		on:click={async () => {
-			var data = await dataString();
-			goto(`/download/${format.id}?input=${data}`);
-		}}
-		class="generateButton">Download</button
-	>
+		{#each format.text as text, i}
+			<input
+				type="text"
+				placeholder="Text"
+				on:input={(e) => {
+					generate();
+				}}
+				bind:value={text.text}
+				class="textInput"
+			/>
+		{/each}
+		<button
+			class="generateButton"
+			on:click={() => {
+				generate(true);
+			}}>Download</button
+		>
+	{/if}
 </div>
 
 <style>

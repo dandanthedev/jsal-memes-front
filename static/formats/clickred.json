@@ -1,0 +1,20 @@
+{
+	"friendlyName": "Two Buttons Click Red",
+	"img": "/formats/clickred.png",
+	"font": "FONT_SANS_32_BLACK",
+
+	"text": [
+		{
+			"x": 60,
+			"y": 60,
+			"maxWidth": 200,
+			"maxHeight": 150
+		},
+		{
+			"x": 300,
+			"y": 40,
+			"maxWidth": 160,
+			"maxHeight": 130
+		}
+	]
+}

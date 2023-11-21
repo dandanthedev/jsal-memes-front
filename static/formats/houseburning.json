@@ -1,0 +1,14 @@
+{
+	"friendlyName": "House Burning",
+	"img": "/formats/houseburning.png",
+	"font": "/impact.fnt",
+
+	"text": [
+		{
+			"x": 0,
+			"y": 100,
+			"maxWidth": 720,
+			"maxHeight": 100
+		}
+	]
+}

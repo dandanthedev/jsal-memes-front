@@ -1,0 +1,14 @@
+{
+	"friendlyName": "Spongebob Throw Away",
+	"img": "/formats/throwaway.png",
+	"font": "FONT_SANS_128_BLACK",
+
+	"text": [
+		{
+			"x": 300,
+			"y": 810,
+			"maxWidth": 800,
+			"maxHeight": 100
+		}
+	]
+}

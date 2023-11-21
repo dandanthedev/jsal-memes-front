@@ -1,0 +1,25 @@
+{
+	"friendlyName": "PANIK kalm PANIK",
+	"font": "FONT_SANS_32_BLACK",
+	"img": "/formats/panikkalmpanik.png",
+	"text": [
+		{
+			"x": 0,
+			"y": 0,
+			"maxWidth": 232,
+			"maxHeight": 180
+		},
+		{
+			"x": 0,
+			"y": 180,
+			"maxWidth": 232,
+			"maxHeight": 180
+		},
+		{
+			"x": 0,
+			"y": 360,
+			"maxWidth": 232,
+			"maxHeight": 180
+		}
+	]
+}

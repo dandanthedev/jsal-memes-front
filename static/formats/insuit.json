@@ -1,0 +1,20 @@
+{
+	"friendlyName": "In a Suit",
+	"img": "/formats/insuit.png",
+	"font": "FONT_SANS_32_BLACK",
+
+	"text": [
+		{
+			"x": 0,
+			"y": 0,
+			"maxWidth": 500,
+			"maxHeight": 100
+		},
+		{
+			"x": 555,
+			"y": 0,
+			"maxWidth": 500,
+			"maxHeight": 100
+		}
+	]
+}

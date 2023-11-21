@@ -1,0 +1,18 @@
+{
+	"friendlyName": "Laser Eyes",
+	"img": "/formats/lasereyes.png",
+	"text": [
+		{
+			"x": 400,
+			"y": 0,
+			"maxWidth": 500,
+			"maxHeight": 350
+		},
+		{
+			"x": 400,
+			"y": 340,
+			"maxWidth": 500,
+			"maxHeight": 350
+		}
+	]
+}

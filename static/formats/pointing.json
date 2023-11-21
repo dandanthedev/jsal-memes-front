@@ -1,0 +1,14 @@
+{
+	"friendlyName": "Pointing",
+	"img": "/formats/pointing.png",
+	"font": "/impact_bigger.fnt",
+
+	"text": [
+		{
+			"x": 0,
+			"y": 100,
+			"maxWidth": 1568,
+			"maxHeight": 100
+		}
+	]
+}

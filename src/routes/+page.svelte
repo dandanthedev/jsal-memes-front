@@ -1,13 +1,19 @@
 <script>
 	import { goto } from '$app/navigation';
-	import { dev } from '$app/environment';
-	export let data;
-	var formats = data.formats;
+	import { onMount } from 'svelte';
+	let data;
+	onMount(async () => {
+		await fetch(`/getFormats`)
+			.then((res) => res.json())
+			.then((res) => {
+				data = res;
+			});
+	});
 </script>
 
 <div class="container">
 	<div class="main">
-		<h1
+		<button
 			class="title"
 			on:click={() => {
 				//play easteregg sound
@@ -16,47 +22,48 @@
 			}}
 		>
 			JackSucksAtMemes
-		</h1>
-
-		<div class="formats">
-			{#each formats as format}
-				<img
-					class="format"
-					src={`${dev ? 'http://localhost:3000' : 'https://jsal-api.daanschenkel.nl'}/img/${
-						format.id
-					}`}
-					alt={format.friendlyName}
-					width="200"
-					height="200"
-					on:click={() => {
-						goto(`/format/${format.id}`);
-					}}
-				/>
-			{/each}
-		</div>
-
-		<button
-			class="more"
-			on:click={async (e) => {
-				e.target.disabled = true;
-				var page = formats.length / 10;
-				page = Math.floor(page) + 1;
-				await fetch(
-					`${
-						dev ? 'http://localhost:3000' : 'https://jsal-api.daanschenkel.nl'
-					}/formats?page=${page}`
-				)
-					.then((res) => res.json())
-					.then((data) => {
-						formats = formats.concat(data.formats);
-						if (data.formats.length === 10) {
-							e.target.disabled = false;
-						}
-					});
-			}}
-		>
-			Load More
 		</button>
+
+		{#if data?.formats}
+			<div class="formats">
+				{#each data.formats as format}
+					<img
+						class="format"
+						src={`/formats/${format.id}.png`}
+						alt={format.friendlyName}
+						width="200"
+						height="200"
+						on:click={() => {
+							goto(`/format/${format.id}`);
+						}}
+					/>
+				{/each}
+			</div>
+		{:else}
+			<div class="format">
+				<div class="loading">Loading...</div>
+			</div>
+		{/if}
+
+		{#if data?.nextPage == null}
+			<button class="more" disabled> Load More </button>
+		{:else}
+			<button
+				class="more"
+				on:click={async (e) => {
+					e.target.disabled = true;
+					await fetch(`/getFormats?page=${data.nextPage}`)
+						.then((res) => res.json())
+						.then((newFormats) => {
+							data.formats = data.formats.concat(newFormats.formats);
+							data.nextPage = newFormats.nextPage;
+						});
+					e.target.disabled = false;
+				}}
+			>
+				Load More
+			</button>
+		{/if}
 	</div>
 </div>
 
@@ -84,6 +91,8 @@
 		justify-content: center;
 
 		padding: 20px;
+
+		min-width: 80vw;
 	}
 	.title {
 		font-size: 30px;
@@ -93,6 +102,10 @@
 		margin-top: 0px;
 		/*change color with animation*/
 		animation: blink 5s infinite;
+
+		cursor: default;
+		background-color: transparent;
+		border: none;
 	}
 	@keyframes blink {
 		0% {
@@ -189,5 +202,13 @@
 	}
 	.more:disabled {
 		background-color: #ccc;
+	}
+
+	.loading {
+		margin-top: 20px;
+		font-size: 20px;
+		font-family: 'Roboto', sans-serif;
+		text-align: center;
+		color: #000;
 	}
 </style>

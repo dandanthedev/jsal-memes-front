@@ -1,0 +1,14 @@
+{
+	"friendlyName": "Waiting",
+	"img": "/formats/mewaiting.png",
+	"font": "FONT_SANS_64_BLACK",
+
+	"text": [
+		{
+			"x": 0,
+			"y": 0,
+			"maxWidth": 1080,
+			"maxHeight": 150
+		}
+	]
+}

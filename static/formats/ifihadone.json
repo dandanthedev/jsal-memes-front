@@ -1,0 +1,19 @@
+{
+	"friendlyName": "This is where i'd put ___ IF I HAD ONE",
+	"font": "impact_smaller.fnt",
+	"img": "/formats/ifihadone.png",
+	"text": [
+		{
+			"x": 0,
+			"y": 0,
+			"maxWidth": 400,
+			"maxHeight": 100
+		},
+		{
+			"x": 0,
+			"y": 250,
+			"maxWidth": 400,
+			"maxHeight": 100
+		}
+	]
+}

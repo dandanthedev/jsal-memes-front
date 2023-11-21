@@ -1,0 +1,13 @@
+{
+	"friendlyName": "Stare",
+	"img": "/formats/stare.png",
+
+	"text": [
+		{
+			"x": 0,
+			"y": 0,
+			"maxWidth": 627,
+			"maxHeight": 100
+		}
+	]
+}

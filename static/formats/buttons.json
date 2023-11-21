@@ -1,0 +1,20 @@
+{
+	"friendlyName": "Two Buttons",
+	"img": "/formats/buttons.png",
+	"font": "FONT_SANS_16_BLACK",
+
+	"text": [
+		{
+			"x": 25,
+			"y": 20,
+			"maxWidth": 170,
+			"maxHeight": 150
+		},
+		{
+			"x": 190,
+			"y": 0,
+			"maxWidth": 130,
+			"maxHeight": 130
+		}
+	]
+}

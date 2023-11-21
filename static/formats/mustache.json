@@ -1,0 +1,20 @@
+{
+	"friendlyName": "Mustache",
+	"img": "/formats/mustache.png",
+	"font": "FONT_SANS_64_BLACK",
+
+	"text": [
+		{
+			"x": 440,
+			"y": 0,
+			"maxWidth": 520,
+			"maxHeight": 450
+		},
+		{
+			"x": 440,
+			"y": 500,
+			"maxWidth": 520,
+			"maxHeight": 450
+		}
+	]
+}

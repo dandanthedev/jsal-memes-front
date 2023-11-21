@@ -1,0 +1,20 @@
+{
+	"friendlyName": "Pointing Kong",
+	"img": "/formats/pointkong.png",
+	"font": "/impact_bigger.fnt",
+
+	"text": [
+		{
+			"x": 0,
+			"y": 0,
+			"maxWidth": 1000,
+			"maxHeight": 150
+		},
+		{
+			"x": 1000,
+			"y": 0,
+			"maxWidth": 1000,
+			"maxHeight": 150
+		}
+	]
+}

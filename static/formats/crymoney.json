@@ -1,0 +1,14 @@
+{
+	"friendlyName": "Crying With Money",
+	"img": "/formats/crymoney.png",
+	"font": "/impact.fnt",
+
+	"text": [
+		{
+			"x": 0,
+			"y": 100,
+			"maxWidth": 627,
+			"maxHeight": 100
+		}
+	]
+}

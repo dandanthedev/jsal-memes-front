@@ -20,6 +20,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@sveltejs/adapter-cloudflare": "^2.3.2"
+		"@sveltejs/adapter-cloudflare": "^2.3.2",
+		"jimp": "^0.22.10"
 	}
 }

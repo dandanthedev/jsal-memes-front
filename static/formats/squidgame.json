@@ -1,0 +1,20 @@
+{
+	"friendlyName": "Squid Game",
+	"img": "/formats/squidgame.png",
+	"font": "FONT_SANS_128_BLACK",
+
+	"text": [
+		{
+			"x": 1000,
+			"y": 200,
+			"maxWidth": 1200,
+			"maxHeight": 350
+		},
+		{
+			"x": 1000,
+			"y": 1000,
+			"maxWidth": 1200,
+			"maxHeight": 350
+		}
+	]
+}
