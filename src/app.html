@@ -1,59 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 	<head>
+		<meta http-equiv="refresh" content="0; url='https://jsal.daanschenkel.nl'" />
 		<title>JackSucksAtMemes</title>
-
-		<meta charset="utf-8" />
-		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
-		<meta name="viewport" content="width=device-width" />
-
-		<meta http-equiv="refresh" content="0; url=https://jsal.daanschenkel.nl" />
-
-		<!-- Hotjar Tracking Code for JackSucksAtMemes, yea boi lets stalk some people -->
-		<script>
-			(function (h, o, t, j, a, r) {
-				h.hj =
-					h.hj ||
-					function () {
-						(h.hj.q = h.hj.q || []).push(arguments);
-					};
-				h._hjSettings = { hjid: 3526673, hjsv: 6 };
-				a = o.getElementsByTagName('head')[0];
-				r = o.createElement('script');
-				r.async = 1;
-				r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
-				a.appendChild(r);
-			})(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
-		</script>
-
+		<meta
+			name="description"
+			content="JackSucksAtMemes is a website where you can find all the meme templates from JackSucksAtLife's reddit series."
+		/>
 		%sveltekit.head%
 	</head>
-	<body data-sveltekit-preload-data="hover" class="bg">
-		<div style="display: contents">%sveltekit.body%</div>
-		<p class="credits">
-			Made by <a target="_blank" href="https://daanschenkel.nl">Daan Schenkel</a>
-		</p>
+	<body>
+		<p>JackSucksAtMemes has moved!</p>
+		<div style="display: none">%sveltekit.body%</div>
 	</body>
 </html>
-<style>
-	.bg {
-		background-color: #000000;
-		background-image: url('https://styles.redditmedia.com/t5_fmlr4/styles/backgroundImage_1q9uj1shsgk91.png');
-		/*make background image stay in place*/
-		background-attachment: fixed;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
-	}
-	.credits {
-		color: #ffffff;
-		position: fixed;
-		left: 10px;
-		bottom: 10px;
-		font-family: 'Roboto', sans-serif;
-		font-size: 12px;
-	}
-	.credits a {
-		color: #ffffff;
-	}
-</style>
