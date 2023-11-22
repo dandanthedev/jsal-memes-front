@@ -9,6 +9,7 @@
 	let format;
 	let imgSrc;
 	let jimpCache = {};
+	let loading = false;
 	onMount(async () => {
 		await fetch(`/format/${$page.params.format}/json`)
 			.then((res) => res.json())
@@ -41,6 +42,8 @@
 	});
 
 	async function generate(download) {
+		loading = true;
+
 		let img = jimpCache.img.clone();
 		//add text
 
@@ -72,6 +75,8 @@
 			a.download = 'meme.png';
 			a.click();
 		}
+
+		loading = false;
 	}
 </script>
 
@@ -87,10 +92,7 @@
 			alt={format.friendlyName}
 			src={imgSrc}
 			class="memeImg"
-			id="result"
-			on:load={(e) => {
-				e.target.style.filter = 'blur(0px)';
-			}}
+			style={loading ? 'filter: blur(10px)' : ''}
 		/>
 		{#each format.text as text, i}
 			<input
@@ -98,7 +100,11 @@
 				placeholder="Text"
 				on:input={(e) => {
 					format.text[i].text = e.target.value;
-					generate();
+					let temp = e.target.value;
+
+					setTimeout(() => {
+						if (temp == e.target.value) generate(false);
+					}, 500);
 				}}
 				class="textInput"
 			/>
@@ -212,7 +218,7 @@
 		height: 70%;
 		object-fit: contain;
 		/*transition when filter is applied*/
-		transition: 1s;
+		transition: 0.5s;
 	}
 	.textInput {
 		margin-top: 10px;
