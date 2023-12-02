@@ -26,7 +26,7 @@
 					else {
 						//get file buffer
 
-						jimpCache.font = await Jimp.loadFont(`/fonts/${format.font}`).then((font) => {
+						jimpCache.font = await Jimp.loadFont(`/fonts${format.font}`).then((font) => {
 							return font;
 						});
 					}
