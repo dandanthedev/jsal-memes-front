@@ -15,7 +15,7 @@
 			.then((res) => res.json())
 			.then(async (res) => {
 				format = res.format;
-
+				imgSrc = format.img;
 				jimpCache.img = await Jimp.read(format.img);
 				imgSrc = await jimpCache.img.getBase64Async(Jimp.MIME_PNG);
 				if (format.font) {
