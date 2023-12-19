@@ -1,15 +1,54 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
+	import { scale, fade } from 'svelte/transition';
 	let data;
+	let showPopup = false;
 	onMount(async () => {
 		await fetch(`/json`)
 			.then((res) => res.json())
 			.then((res) => {
 				data = res;
 			});
+		if (!localStorage.getItem('disablePopup')) {
+			showPopup = true;
+		}
 	});
 </script>
+
+{#if showPopup}
+	<div class="modalContainer" transition:fade={{ duration: 200 }}>
+		<div class="modal" transition:scale={{ duration: 200 }}>
+			<h1 class="modalTitle">The JackSucksAtMemes Survey</h1>
+			<p class="modalText">
+				Heya! It's the end of the year, and i thought it'd be fun to make a survey about the
+				JackSucks empire!
+				<br />
+				You can click the button below to take the survey, if you dont want to, then thats fine too!
+			</p>
+			<div class="modalButtons">
+				<a
+					href="https://forms.gle/9Tsao4VjftRaZfLj6"
+					target="_blank"
+					rel="noopener noreferrer"
+					on:click={() => {
+						localStorage.setItem('disablePopup', true);
+						showPopup = false;
+					}}
+				>
+					<button class="modalButton">Take the survey</button>
+				</a>
+				<button
+					class="modalButton"
+					on:click={() => {
+						localStorage.setItem('disablePopup', true);
+						showPopup = false;
+					}}>No thanks</button
+				>
+			</div>
+		</div>
+	</div>
+{/if}
 
 <div class="container">
 	<div class="main">
@@ -223,5 +262,60 @@
 		font-family: 'Roboto', sans-serif;
 		text-align: center;
 		color: #000;
+	}
+
+	/*modal*/
+	.modalContainer {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background-color: rgba(0, 0, 0, 0.5);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.modal {
+		background-color: #fff;
+		border-radius: 10px;
+		padding: 20px;
+	}
+	.modalTitle {
+		font-size: 30px;
+		font-family: 'Roboto', sans-serif;
+		text-align: center;
+		color: #000;
+		margin-top: 0px;
+	}
+	.modalText {
+		font-size: 20px;
+		font-family: 'Roboto', sans-serif;
+		text-align: center;
+		color: #000;
+		margin-top: 0px;
+	}
+	.modalButtons {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+	}
+	.modalButton {
+		margin: 10px;
+		border-radius: 10px;
+		border: none;
+		background-color: #fe5292;
+		color: #fff;
+		padding: 10px;
+		font-size: 20px;
+		cursor: pointer;
+		transition: 0.5s;
+	}
+	.modalButton:hover {
+		background-color: #ec417b;
+	}
+	.modalButton:disabled {
+		background-color: #ccc;
 	}
 </style>
