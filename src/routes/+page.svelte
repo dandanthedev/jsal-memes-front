@@ -3,52 +3,17 @@
 	import { onMount } from 'svelte';
 	import { scale, fade } from 'svelte/transition';
 	let data;
-	let showPopup = false;
 	onMount(async () => {
 		await fetch(`/json`)
 			.then((res) => res.json())
 			.then((res) => {
 				data = res;
 			});
-		if (!localStorage.getItem('disablePopup')) {
-			showPopup = true;
-		}
+		
 	});
 </script>
 
-{#if showPopup}
-	<div class="modalContainer" transition:fade={{ duration: 200 }}>
-		<div class="modal" transition:scale={{ duration: 200 }}>
-			<h1 class="modalTitle">The JackSucksAtMemes Survey</h1>
-			<p class="modalText">
-				Heya! It's the end of the year, and i thought it'd be fun to make a survey about the
-				JackSucks empire!
-				<br />
-				You can click the button below to take the survey, if you dont want to, then thats fine too!
-			</p>
-			<div class="modalButtons">
-				<a
-					href="https://forms.gle/9Tsao4VjftRaZfLj6"
-					target="_blank"
-					rel="noopener noreferrer"
-					on:click={() => {
-						localStorage.setItem('disablePopup', true);
-						showPopup = false;
-					}}
-				>
-					<button class="modalButton">Take the survey</button>
-				</a>
-				<button
-					class="modalButton"
-					on:click={() => {
-						localStorage.setItem('disablePopup', true);
-						showPopup = false;
-					}}>No thanks</button
-				>
-			</div>
-		</div>
-	</div>
-{/if}
+
 
 <div class="container">
 	<div class="main">
